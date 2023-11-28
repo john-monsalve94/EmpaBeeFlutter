@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senaflutterapp/constants/constants.dart';
-import 'package:senaflutterapp/pages/entradaSena.dart';
+import 'package:senaflutterapp/views/entradaSena.dart';
 import 'package:senaflutterapp/ui/widgets/custom_shape.dart';
 import 'package:senaflutterapp/ui/widgets/customappbar.dart';
 import 'package:senaflutterapp/ui/widgets/responsive_ui.dart';

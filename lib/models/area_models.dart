@@ -1,3 +1,41 @@
+import 'dart:convert';
+
+RenponseApiAreas areaFromjson(String x) {
+  return RenponseApiAreas.fromJson(json.decode(x));
+}
+
+String areaToJson(RenponseApiAreas y) {
+  return json.encode(y.toJson());
+}
+
+class RenponseApiAreas {
+  List<Area> areas;
+  RenponseApiAreas({
+
+    required this.areas
+  });
+factory RenponseApiAreas.fromJson(Map<String, dynamic> json) {
+    var areasList = json['areas'] as List;
+    List<Area> areas = areasList
+        .map((item) => Area.fromJson(item))
+        .toList();
+
+    return RenponseApiAreas(
+     
+      areas:areas,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+
+      "areas":
+          List<dynamic>.from(areas.map((item) => item.toJson()))
+    };
+  }
+
+}
+
 class Area {
   int id;
   String iconUrl;
@@ -15,8 +53,9 @@ class Area {
 
   factory Area.fromJson(Map<String, dynamic> json) {
     var infraestructurasList = json['infraestructuras'] as List;
-    List<Infraestructura> infraestructuras =
-        infraestructurasList.map((item) => Infraestructura.fromJson(item)).toList();
+    List<Infraestructura> infraestructuras = infraestructurasList
+        .map((item) => Infraestructura.fromJson(item))
+        .toList();
 
     return Area(
       id: json['id'],
@@ -25,6 +64,16 @@ class Area {
       codigo: json['codigo'],
       infraestructuras: infraestructuras,
     );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "iconUrl": iconUrl,
+      "nombreArea": nombreArea,
+      "codigo": codigo,
+      "infraestructuras":
+          List<dynamic>.from(infraestructuras.map((item) => item.toJson()))
+    };
   }
 }
 
@@ -57,5 +106,16 @@ class Infraestructura {
       idSede: json['idSede'],
       idArea: json['idArea'],
     );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "nombreInfraestructura": nombreInfraestructura,
+      "capacidad": capacidad,
+      "codigoQr": codigoQr,
+      "descripcion": descripcion,
+      "idSede": idSede,
+      "idArea": idArea
+    };
   }
 }

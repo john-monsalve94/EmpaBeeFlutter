@@ -1,12 +1,11 @@
-// ignore_for_file: sized_box_for_whitespace, avoid_unnecessary_containers, library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
-import 'package:senaflutterapp/pages/dataListView.dart';
-//import 'package:senaflutterapp/constants/constants.dart';
+import 'package:senaflutterapp/models/infraestructuras_models.dart';
+import 'package:senaflutterapp/services/infraestructuras_services.dart';
 import 'package:senaflutterapp/ui/widgets/custom_shape.dart';
 import 'package:senaflutterapp/ui/widgets/customappbar.dart';
 import 'package:senaflutterapp/ui/widgets/responsive_ui.dart';
-//import 'package:senaflutterapp/ui/widgets/textformfield.dart';
+import 'package:senaflutterapp/views/twoViews.dart';
+import 'package:http/http.dart' as http;
 
 class EntradaSena extends StatefulWidget {
   const EntradaSena({super.key});
@@ -16,29 +15,34 @@ class EntradaSena extends StatefulWidget {
 }
 
 class _EntradaSenaState extends State<EntradaSena> {
-  final List<String> _sede = [
-    ' ',
-    'Centro comercio y servicios',
-    'Centro Tele-informática y producción industrial',
-  ];
-  final List<String> _area = [' ', 'TICS', 'Cocina', 'Diseño'];
-  final List<String> _infraestructura = [
-    ' ',
-    'software 1',
-    'software2',
-    'Tics',
-    'Teatro'
-  ];
+  List<InfraestructurasModels>? _infraList;
 
   String? _selectedSede;
   String? _selectedArea;
   String? _selectedInfraestructura;
+  var isLoaded = false;
 
   late double _height;
   late double _width;
   late double _pixelRatio;
   late bool _large;
   late bool _medium;
+  @override
+  void initState() {
+    super.initState();
+
+    // Fetch data from API
+    getData();
+  }
+
+  getData() async {
+    _infraList = await infraestructurasServices().getInfraestructura();
+    if (_infraList != null) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +54,7 @@ class _EntradaSenaState extends State<EntradaSena> {
 
     return Material(
       child: Scaffold(
+        
         body: Container(
           height: _height,
           width: _width,
@@ -149,97 +154,169 @@ class _EntradaSenaState extends State<EntradaSena> {
     );
   }
 
+
   Widget sedeText() {
+    Set<String> nombresSedeUnicos = Set();
+    List<DropdownMenuItem<String>> dropdownItems = [];
+    for (final infraestructura in _infraList ?? []) {
+      final nombreSede = infraestructura.sede.nombreSede;
+      if (!nombresSedeUnicos.contains(nombreSede)) {
+        nombresSedeUnicos.add(nombreSede);
+        dropdownItems.add(
+          DropdownMenuItem<String>(
+            value: nombreSede,
+            child: Text(nombreSede),
+          ),
+        );
+      }
+    }
+
     return Container(
       child: DropdownButtonFormField<String>(
         value: _selectedSede,
-        onChanged: (String? newValue) {
-          setState(() {
-            _selectedSede = newValue;
-          });
-        },
         hint: const Text(
           'Selecciona una sede',
         ),
-        items: _sede.map((name) {
-          return DropdownMenuItem<String>(
-            value: name,
-            child: Text(name),
-          );
-        }).toList(),
+        onChanged: (newValue) {
+          setState(() {
+            _selectedSede = newValue;
+            // Al seleccionar una sede, reseteamos el área seleccionada
+            _selectedArea = null;
+          });
+        },
+        items: dropdownItems,
       ),
     );
   }
 
   Widget areaText() {
+    Set<String> nombresAreaUnicos = Set();
+    List<DropdownMenuItem<String>> dropdownItems = [];
+
+    // Filtrar las infraestructuras basadas en la sede seleccionada
+    final infraestructurasFiltradas = _infraList
+        ?.where((infraestructura) =>
+            infraestructura.sede.nombreSede == _selectedSede)
+        .toList();
+
+    if (_selectedSede != null) {
+      for (final infraestructura in infraestructurasFiltradas ?? []) {
+        final nombreArea = infraestructura.area.nombreArea;
+        if (!nombresAreaUnicos.contains(nombreArea)) {
+          nombresAreaUnicos.add(nombreArea);
+          dropdownItems.add(
+            DropdownMenuItem<String>(
+              value: nombreArea,
+              child: Text(nombreArea),
+            ),
+          );
+        }
+      }
+    }
+
     return Container(
       child: DropdownButtonFormField<String>(
         value: _selectedArea,
-        onChanged: (String? newValue) {
+        hint: const Text(
+          'Selecciona un área',
+        ),
+        onChanged: (newValue) {
           setState(() {
             _selectedArea = newValue;
+            _selectedInfraestructura = null;
           });
         },
-        hint: const Text(
-          'Selecciona una area',
-        ),
-        items: _area.map((name) {
-          return DropdownMenuItem<String>(
-            value: name,
-            child: Text(name),
-          );
-        }).toList(),
+        items: dropdownItems,
       ),
     );
   }
 
   Widget infraestructuraText() {
+    Set<String> nombresInfraUnicos = Set();
+    List<DropdownMenuItem<String>> dropdownItems = [];
+
+    // Filtrar las infraestructuras basadas en la area seleccionada
+    final infraestructurasFiltradas = _infraList
+        ?.where((infraestructura) =>
+            infraestructura.area.nombreArea == _selectedArea)
+        .toList();
+    if (_selectedArea != null) {
+      for (final infraestructura in infraestructurasFiltradas ?? []) {
+        final nombreInfra = infraestructura.nombreInfraestructura;
+        if (!nombresInfraUnicos.contains(nombreInfra)) {
+          nombresInfraUnicos.add(nombreInfra);
+          dropdownItems.add(
+            DropdownMenuItem<String>(
+              value: nombreInfra,
+              child: Text(nombreInfra),
+            ),
+          );
+        }
+      }
+    }
     return Container(
       child: DropdownButtonFormField<String>(
         value: _selectedInfraestructura,
-        onChanged: (String? newValue) {
+        hint: const Text(
+          'Selecciona una infraestructura',
+        ),
+        onChanged: (newValue) {
           setState(() {
             _selectedInfraestructura = newValue;
           });
         },
-        hint: const Text(
-          'Selecciona una infraestructura',
-        ),
-        items: _infraestructura.map((name) {
-          return DropdownMenuItem<String>(
-            value: name,
-            child: Text(name),
-          );
-        }).toList(),
+        items: dropdownItems,
       ),
     );
   }
 
   Widget signInTextRow() {
-    return Container(
-      //margin: EdgeInsets.only(top: _height ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
+  return Container(
+    child: Column(
+      children: [
+        SizedBox(height: 40),
+        if (_selectedInfraestructura != null)
+          Text(
+            'Infraestructura : $_selectedInfraestructura',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+          ),
+        SizedBox(height: 50),
+        if (_selectedInfraestructura != null)
+          Container(
+            width: 150,
+            height: 150,
+            child: Image.asset('assets/images/qrcode-generado.png'), // Cambia el nombre del archivo de imagen según tu configuración
+          ),
+        SizedBox(height: 50),
+        GestureDetector(
+          onTap: () {
+            if (_selectedInfraestructura != null) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DataListView()),
+                MaterialPageRoute(
+                  builder: (context) =>
+                      TwoViews(), // Reemplaza vista
+                ),
               );
-              // ignore: avoid_print
-              print("siguiente");
-            },
-            child: const Text(
-              'Next-View',
-              style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  color: Color.fromARGB(255, 28, 221, 86),
-                  fontSize: 19),
+            }
+          },
+          child: const Text(
+            'Next-View',
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              color: Color.fromARGB(255, 28, 221, 86),
+              fontSize: 19,
             ),
-          )
-        ],
-      ),
-    );
-  }
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+
+
 }

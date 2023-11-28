@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:senaflutterapp/constants/constants.dart';
-import 'package:senaflutterapp/pages/entradaSena.dart';
-import 'package:senaflutterapp/pages/signin.dart';
-import 'package:senaflutterapp/pages/signup.dart';
-import 'package:senaflutterapp/pages/splashscreen.dart';
+import 'package:senaflutterapp/views/twoViews.dart';
+import 'package:senaflutterapp/views/entradaSena.dart';
+import 'package:senaflutterapp/views/signin.dart';
+import 'package:senaflutterapp/views/signup.dart';
+import 'package:senaflutterapp/views/splashscreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         SIGN_IN: (BuildContext context) => SignInPage(),
         SIGN_UP: (BuildContext context) => SignUpScreen(),
         ENTRADA_SENA: (BuildContext context) => EntradaSena(),
+        TWOVIEWS:(BuildContext context) => TwoViews(),
       },
       initialRoute: SPLASH_SCREEN,
     );
