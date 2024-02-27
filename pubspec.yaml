@@ -34,8 +34,8 @@ flutter:
     - assets/images/login.png
     - assets/images/logo.png
     - assets/images/powered_by.png
-    - assets/images/logo-sena-verde.png
-    - assets/images/logo-sena-blanco.png
+    - assets/images/logoSolo.png
+    - assets/images/LogoEmpabee.png
     - assets/images/qrcode-generado.png
 
   

@@ -52,22 +52,22 @@ class SplashScreenState extends State<SplashScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Image.asset(
-                'assets/images/logo-sena-verde.png',
+                'assets/images/logoSolo.png',
                 width: animation.value * 250,
                 height: animation.value * 250,
                 
               ),
               SizedBox(height: 45),
               Text(
-                'SENA', 
+                'EmpaBee', 
                 style: TextStyle(
-                  color: Colors.green,fontSize: 40,fontWeight: FontWeight.bold
+                  color: Color.fromARGB(255, 251, 215, 140),fontWeight: FontWeight.bold
                   ),
               ),
               SizedBox(height: 30),
-              Text('Una entidad de clase mundial',
+              Text('Preservemos a las abejas, creadoras de miel.',
               style: TextStyle(
-                  color: Colors.green,
+                  color: Color.fromARGB(255, 251, 215, 140),
                   fontSize: 20,)
                   )
 

@@ -53,24 +53,26 @@ class _EntradaSenaState extends State<EntradaSena> {
     _medium = ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
 
     return Material(
-      child: Scaffold(
-        
-        body: Container(
-          height: _height,
-          width: _width,
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                const Opacity(opacity: 0.88, child: CustomAppBar()),
-                clipShape(),
-                listPrincipal(),
-                signInTextRow(),
-              ],
+        child: Scaffold(
+            body: Container(
+      height: _height,
+      width: _width,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            CustomAppBar(
+              onBackPressed: () {
+                print("pop");
+                Navigator.of(context).pop();
+              },
             ),
-          ),
+            clipShape(),
+            listPrincipal(),
+            signInTextRow(),
+          ],
         ),
       ),
-    );
+    )));
   }
 
   Widget clipShape() {
@@ -87,8 +89,8 @@ class _EntradaSenaState extends State<EntradaSena> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 28, 221, 86),
-                  Color.fromARGB(255, 12, 116, 34)
+                  Color.fromARGB(255, 251, 215, 140),
+                  Color.fromARGB(255, 247, 167, 51)
                 ],
               ),
             ),
@@ -107,8 +109,8 @@ class _EntradaSenaState extends State<EntradaSena> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 28, 221, 86),
-                  Color.fromARGB(255, 12, 116, 34)
+                  Color.fromARGB(255, 251, 215, 140),
+                  Color.fromARGB(255, 247, 167, 51)
                 ],
               ),
             ),
@@ -120,7 +122,7 @@ class _EntradaSenaState extends State<EntradaSena> {
         alignment: Alignment.topCenter,
         padding: const EdgeInsets.only(bottom: 10),
         child: Image.asset(
-          'assets/images/logo-sena-blanco.png',
+          'assets/images/LogoEmpabee.png',
         ),
       )
     ]);
@@ -140,7 +142,7 @@ class _EntradaSenaState extends State<EntradaSena> {
               style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(255, 12, 116, 34)),
+                  color: Color.fromARGB(255, 247, 167, 51)),
             ),
             SizedBox(height: _height / 30.0),
             sedeText(),
@@ -153,7 +155,6 @@ class _EntradaSenaState extends State<EntradaSena> {
       ),
     );
   }
-
 
   Widget sedeText() {
     Set<String> nombresSedeUnicos = Set();
@@ -271,52 +272,49 @@ class _EntradaSenaState extends State<EntradaSena> {
   }
 
   Widget signInTextRow() {
-  return Container(
-    child: Column(
-      children: [
-        SizedBox(height: 40),
-        if (_selectedInfraestructura != null)
-          Text(
-            'Infraestructura : $_selectedInfraestructura',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(height: 40),
+          if (_selectedInfraestructura != null)
+            Text(
+              'Infraestructura : $_selectedInfraestructura',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+            ),
+          SizedBox(height: 50),
+          if (_selectedInfraestructura != null)
+            Container(
+              width: 150,
+              height: 150,
+              child: Image.asset(
+                  'assets/images/qrcode-generado.png'), // Cambia el nombre del archivo de imagen según tu configuración
+            ),
+          SizedBox(height: 50),
+          GestureDetector(
+            onTap: () {
+              if (_selectedInfraestructura != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TwoViews(), // Reemplaza vista
+                  ),
+                );
+              }
+            },
+            child: const Text(
+              'Next-View',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                color: Color.fromARGB(255, 215, 173, 19),
+                fontSize: 19,
+              ),
             ),
           ),
-        SizedBox(height: 50),
-        if (_selectedInfraestructura != null)
-          Container(
-            width: 150,
-            height: 150,
-            child: Image.asset('assets/images/qrcode-generado.png'), // Cambia el nombre del archivo de imagen según tu configuración
-          ),
-        SizedBox(height: 50),
-        GestureDetector(
-          onTap: () {
-            if (_selectedInfraestructura != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      TwoViews(), // Reemplaza vista
-                ),
-              );
-            }
-          },
-          child: const Text(
-            'Next-View',
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
-              color: Color.fromARGB(255, 28, 221, 86),
-              fontSize: 19,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-
-
+        ],
+      ),
+    );
+  }
 }

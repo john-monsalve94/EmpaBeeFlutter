@@ -37,9 +37,9 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         controller: textEditingController,
         keyboardType: keyboardType,
-        cursorColor: const Color.fromARGB(255, 28, 221, 86),
+        cursorColor: const Color.fromARGB(255, 247, 167, 51),
         decoration: InputDecoration(
-          prefixIcon: Icon(icon, color: const Color.fromARGB(255, 28, 221, 86), size: 20),
+          prefixIcon: Icon(icon, color: const Color.fromARGB(255, 247, 167, 51), size: 20),
           hintText: hint,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),

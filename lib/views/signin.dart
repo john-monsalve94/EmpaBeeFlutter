@@ -92,8 +92,8 @@ class _SignInScreenState extends State<SignInScreen> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 28, 221, 86),
-                    Color.fromARGB(255, 12, 116, 34)
+                    Color.fromARGB(255, 251, 215, 140),
+                    Color.fromARGB(255, 247, 167, 51),
                   ],
                 ),
               ),
@@ -111,8 +111,8 @@ class _SignInScreenState extends State<SignInScreen> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 28, 221, 86),
-                    Color.fromARGB(255, 12, 116, 34)
+                    Color.fromARGB(255, 251, 215, 140),
+                    Color.fromARGB(255, 247, 167, 51)
                   ],
                 ),
               ),
@@ -126,7 +126,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ? _height / 30
                   : (_medium ? _height / 25 : _height / 20)),
           child: Image.asset(
-            'assets/images/logo-sena-blanco.png',
+            'assets/images/LogoEmpabee.png',
             height: _height / 4,
             width: _width / 2,
           ),
@@ -141,9 +141,9 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Row(
         children: <Widget>[
           Text(
-            "Welcome",
+            "Inicio de sesion",
             style: TextStyle(
-              color: Color.fromARGB(255, 28, 221, 86),
+              color: Color.fromARGB(255, 0, 0, 0),
               fontWeight: FontWeight.bold,
               fontSize: _large ? 60 : (_medium ? 50 : 40),
             ),
@@ -159,9 +159,9 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Row(
         children: <Widget>[
           Text(
-            "Sign in to your account",
+            "Inicia sesion con tu cuenta EmpaBee",
             style: TextStyle(
-              color: Color.fromARGB(255, 28, 221, 86),
+              color: Color.fromARGB(255, 0, 0, 0),
               fontWeight: FontWeight.w500,
               fontSize: _large ? 20 : (_medium ? 17.5 : 15),
             ),
@@ -193,7 +193,7 @@ class _SignInScreenState extends State<SignInScreen> {
       keyboardType: TextInputType.emailAddress,
       textEditingController: emailController,
       icon: Icons.email,
-      hint: "Email ID",
+      hint: "Ingresa tu correo",
     );
   }
 
@@ -203,7 +203,7 @@ class _SignInScreenState extends State<SignInScreen> {
       textEditingController: passwordController,
       icon: (Icons.lock),
       obscureText: true,
-      hint: "Password",
+      hint: "Ingresa tu contraseña",
     );
   }
 
@@ -214,7 +214,7 @@ class _SignInScreenState extends State<SignInScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Forgot your password?",
+            "Olvidaste tu contraseña?",
             style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: _large ? 14 : (_medium ? 12 : 10)),
@@ -227,10 +227,10 @@ class _SignInScreenState extends State<SignInScreen> {
               print("Routing");
             },
             child: Text(
-              "Recover",
+              "Recuperar contraseña",
               style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  color: Color.fromARGB(255, 28, 221, 86)),
+                  color: Color.fromARGB(255, 251, 215, 140)),
             ),
           )
         ],
@@ -238,45 +238,46 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-Widget button() {
-  return ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      padding: EdgeInsets.all(0.0),
-      textStyle: TextStyle(color: Colors.white),
-    ),
-    onPressed: _login,
-    child: Container(
-      alignment: Alignment.center,
-      width: _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-        gradient: LinearGradient(
-          colors: <Color>[
-            Color.fromARGB(255, 28, 221, 86),
-            Color.fromARGB(255, 12, 116, 34)
-          ],
-        ),
+  Widget button() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 2,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        padding: EdgeInsets.all(0.0),
+        textStyle: TextStyle(color: Colors.white),
       ),
-      padding: const EdgeInsets.all(12.0),
-      child: Text('SIGN IN',
-          style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10))),
-    ),
-  );
-}
+      onPressed: _login,
+      child: Container(
+        alignment: Alignment.center,
+        width: _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          gradient: LinearGradient(
+            colors: <Color>[
+              Color.fromARGB(255, 251, 215, 140),
+              Color.fromARGB(255, 247, 167, 51)
+            ],
+          ),
+        ),
+        padding: const EdgeInsets.all(12.0),
+        child: Text('Inicia sesión',
+            style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10))),
+      ),
+    );
+  }
 
-    // onPressed: () {
+  // onPressed: () {
 
-      // print("Routing to your account");
-      // ScaffoldMessenger.of(context)
-      //     .showSnackBar(SnackBar(content: Text('Login Successful'))); //
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => EntradaSena()),
-      // );
+  // print("Routing to your account");
+  // ScaffoldMessenger.of(context)
+  //     .showSnackBar(SnackBar(content: Text('Login Successful'))); //
+  // Navigator.push(
+  //   context,
+  //   MaterialPageRoute(builder: (context) => EntradaSena()),
+  // );
 
-      // },
+  // },
   Widget signUpTextRow() {
     return Container(
       margin: EdgeInsets.only(top: _height / 120.0),
@@ -284,7 +285,7 @@ Widget button() {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Don't have an account?",
+            "No tienes cuenta?",
             style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: _large ? 14 : (_medium ? 12 : 10)),
@@ -298,10 +299,10 @@ Widget button() {
               print("Routing to Sign up screen");
             },
             child: Text(
-              "Sign up",
+              "Registrate",
               style: TextStyle(
                   fontWeight: FontWeight.w800,
-                  color: Color.fromARGB(255, 28, 221, 86),
+                  color: Color.fromARGB(255, 251, 215, 140),
                   fontSize: _large ? 19 : (_medium ? 17 : 15)),
             ),
           )

@@ -6,8 +6,6 @@ import 'package:senaflutterapp/ui/widgets/customappbar.dart';
 import 'package:senaflutterapp/ui/widgets/responsive_ui.dart';
 import 'package:senaflutterapp/ui/widgets/textformfield.dart';
 
-
-
 class SignUpScreen extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
@@ -23,17 +21,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
     _pixelRatio = MediaQuery.of(context).devicePixelRatio;
-    _large =  ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
-    _medium =  ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
+    _large = ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
+    _medium = ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
 
     return Material(
       child: Scaffold(
         body: Container(
-          
           height: _height,
           width: _width,
           //margin: EdgeInsets.only(bottom: 5),
@@ -41,12 +37,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Opacity(opacity: 0.88,
-                child: CustomAppBar()),
+                Opacity(
+                    opacity: 0.88,
+                    child: CustomAppBar(
+                      onBackPressed: () {
+                        print("pop");
+                        Navigator.of(context).pop();
+                      },
+                    )),
                 clipShape(),
                 form(),
                 acceptTermsTextRow(),
-                SizedBox(height: _height/50,),
+                SizedBox(
+                  height: _height / 50,
+                ),
                 button(),
                 infoTextRow(),
                 socialIconsRow(),
@@ -67,10 +71,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: ClipPath(
             clipper: CustomShapeClipper(),
             child: Container(
-              height: _large? _height/8 : (_medium? _height/7 : _height/6.5),
+              height: _large
+                  ? _height / 8
+                  : (_medium ? _height / 7 : _height / 6.5),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color.fromARGB(255, 28, 221, 86), Color.fromARGB(255, 12, 116, 34)],
+                  colors: [
+                    Color.fromARGB(255, 251, 215, 140),
+                    Color.fromARGB(255, 247, 167, 51)
+                  ],
                 ),
               ),
             ),
@@ -81,10 +90,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: ClipPath(
             clipper: CustomShapeClipper2(),
             child: Container(
-              height: _large? _height/12 : (_medium? _height/11 : _height/10),
+              height: _large
+                  ? _height / 12
+                  : (_medium ? _height / 11 : _height / 10),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color.fromARGB(255, 28, 221, 86), Color.fromARGB(255, 12, 116, 34)],
+                  colors: [
+                    Color.fromARGB(255, 251, 215, 140),
+                    Color.fromARGB(255, 247, 167, 51)
+                  ],
                 ),
               ),
             ),
@@ -96,20 +110,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                  spreadRadius: 0.0,//La cantidad de propagación de la sombrase utiliza un valor de 0 para no aplicar propagación.
-                  color: Colors.black26,// El color de la sombra. En este caso, se utiliza 
-                  offset: Offset(1.0, 10.0),//El desplazamiento de la sombra en coordenadas (x, y).
-                  blurRadius: 20.0),//Cuanto mayor sea el valor, más difusa será la sombra.
+                  spreadRadius:
+                      0.0, //La cantidad de propagación de la sombrase utiliza un valor de 0 para no aplicar propagación.
+                  color: Colors
+                      .black26, // El color de la sombra. En este caso, se utiliza
+                  offset: Offset(1.0,
+                      10.0), //El desplazamiento de la sombra en coordenadas (x, y).
+                  blurRadius:
+                      20.0), //Cuanto mayor sea el valor, más difusa será la sombra.
             ],
             color: Colors.white,
-            shape: BoxShape.circle,//el contenedor adopta una forma circular.
+            shape: BoxShape.circle, //el contenedor adopta una forma circular.
           ),
-          child: GestureDetector(// permite detectar y responder a diferentes gestos y eventos de entrada, como toques, arrastres, pulsaciones largas, entre otros
-              onTap: (){
+          child: GestureDetector(
+              // permite detectar y responder a diferentes gestos y eventos de entrada, como toques, arrastres, pulsaciones largas, entre otros
+              onTap: () {
                 print('Adding photo');
               },
-
-              child: Icon(Icons.add_a_photo, size: _large? 40: (_medium? 33: 31),color:Color.fromARGB(255, 28, 221, 86),)),
+              child: Icon(
+                Icons.add_a_photo,
+                size: _large ? 40 : (_medium ? 33 : 31),
+                color: Color.fromARGB(255, 251, 215, 140),
+              )),
         ),
       ],
     );
@@ -118,16 +140,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget form() {
     return Container(
       margin: EdgeInsets.only(
-          left:_width/ 12.0,
-          right: _width / 12.0,
-          top: _height / 20.0),
+          left: _width / 12.0, right: _width / 12.0, top: _height / 20.0),
       child: Form(
         child: Column(
           children: <Widget>[
             firstNameTextFormField(),
             SizedBox(height: _height / 60.0),
             lastNameTextFormField(),
-            SizedBox(height: _height/ 60.0),
+            SizedBox(height: _height / 60.0),
             emailTextFormField(),
             SizedBox(height: _height / 60.0),
             phoneTextFormField(),
@@ -143,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return CustomTextField(
       keyboardType: TextInputType.text,
       icon: Icons.person,
-      hint: "First Name",
+      hint: "Nombre",
     );
   }
 
@@ -151,7 +171,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return CustomTextField(
       keyboardType: TextInputType.text,
       icon: Icons.person,
-      hint: "Last Name",
+      hint: "Apellido",
     );
   }
 
@@ -159,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return CustomTextField(
       keyboardType: TextInputType.emailAddress,
       icon: Icons.email,
-      hint: "Email ID",
+      hint: "Correo",
     );
   }
 
@@ -167,7 +187,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return CustomTextField(
       keyboardType: TextInputType.number,
       icon: Icons.phone,
-      hint: "Mobile Number",
+      hint: "Numero telefonico",
     );
   }
 
@@ -176,7 +196,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       keyboardType: TextInputType.text,
       obscureText: true,
       icon: Icons.lock,
-      hint: "Password",
+      hint: "Contraseña",
     );
   }
 
@@ -187,51 +207,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Checkbox(
-              activeColor: Color.fromARGB(255, 28, 221, 86),
+              activeColor: Color.fromARGB(255, 251, 215, 140),
               value: checkBoxValue,
               onChanged: (bool? newValue) {
                 if (newValue != null) {
-                setState(() {
-                  checkBoxValue = newValue;
-                });
-              }}),
+                  setState(() {
+                    checkBoxValue = newValue;
+                  });
+                }
+              }),
           Text(
-            "I accept all terms and conditions",
-            style: TextStyle(fontWeight: FontWeight.w400, fontSize: _large? 12: (_medium? 11: 10)),
+            "Acepta terminos y condiciones",
+            style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: _large ? 12 : (_medium ? 11 : 10)),
           ),
         ],
       ),
     );
   }
 
-Widget button() {
-  return ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      padding: EdgeInsets.all(0.0),
-      
-    ),
-    onPressed: () {
-      print("Routing to your account");
-    },
-    child: Container(
-      alignment: Alignment.center,
-      width: _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-        gradient: LinearGradient(
-          colors: <Color>[Color.fromARGB(255, 28, 221, 86), Color.fromARGB(255, 12, 116, 34)],
+  Widget button() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        padding: EdgeInsets.all(0.0),
+      ),
+      onPressed: () {
+        print("Routing to your account");
+      },
+      child: Container(
+        alignment: Alignment.center,
+        width: _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          gradient: LinearGradient(
+            colors: <Color>[
+               Color.fromARGB(255, 251, 215, 140),
+                    Color.fromARGB(255, 247, 167, 51)
+            ],
+          ),
+        ),
+        padding: const EdgeInsets.all(12.0),
+        child: Text(
+          'Registrarse',
+          style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10)),
         ),
       ),
-      padding: const EdgeInsets.all(12.0),
-      child: Text(
-        'SIGN UP',
-        style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10)),
-      ),
-    ),
-  );
-}
+    );
+  }
 //   Widget button() {
 //     return RaisedButton(
 //       elevation: 0,
@@ -264,8 +290,10 @@ Widget button() {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Or create using social media",
-            style: TextStyle(fontWeight: FontWeight.w400, fontSize: _large? 12: (_medium? 11: 10)),
+            "Crea usando tu Cuenta",
+            style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: _large ? 12 : (_medium ? 11 : 10)),
           ),
         ],
       ),
@@ -274,7 +302,7 @@ Widget button() {
 
   Widget socialIconsRow() {
     return Container(
-      margin: EdgeInsets.only( bottom: 15, top: 15),
+      margin: EdgeInsets.only(bottom: 15, top: 15),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -322,23 +350,30 @@ Widget button() {
             child: Text(
               "Sign in",
               style: TextStyle(
-                  fontWeight: FontWeight.w800, color: Color.fromARGB(255, 28, 221, 86), fontSize: 19),
+                  fontWeight: FontWeight.w800,
+                  color: Color.fromARGB(255, 251, 215, 140),
+                  fontSize: 19),
             ),
-          ), SizedBox(
+          ),
+          SizedBox(
             width: 30,
           ),
           GestureDetector(
-            
-            onTap:(){
-              Navigator.push(context,
-              MaterialPageRoute(builder: (context)=> EntradaSena()),);
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EntradaSena()),
+              );
               print("siguiente");
-            } , 
-            child: Text('Next-View',
-            style: TextStyle(fontWeight: FontWeight.w800, color: Color.fromARGB(255, 28, 221, 86), fontSize: 19),
+            },
+            child: Text(
+              'Next-View',
+              style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: Color.fromARGB(255, 251, 215, 140),
+                  fontSize: 19),
             ),
           )
-
         ],
       ),
     );

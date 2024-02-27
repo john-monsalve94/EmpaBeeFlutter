@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  final VoidCallback onBackPressed;
+
+  const CustomAppBar({Key? key, required this.onBackPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,22 +11,19 @@ class CustomAppBar extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Material(
       child: Container(
-        height: height/12, // esto le coloca el tamaño al appbar
+        height: height / 12,
         width: width,
-        padding: const EdgeInsets.only(left: 15, top: 25,),// espacio de 15 unidades en la parte izq y arriba de 25
+        padding: const EdgeInsets.only(left: 15, top: 25),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors:[Color.fromARGB(255, 28, 221, 86), Color.fromARGB(255, 12, 116, 34)]
-          ),
+              colors: [Color.fromARGB(255, 251, 215, 140), Color.fromARGB(255, 247, 167, 51)]),
         ),
         child: Row(
           children: <Widget>[
             IconButton(
-                icon: Icon(Icons.arrow_back,),
-                onPressed: (){
-                  print("pop");
-                  Navigator.of(context).pop();
-            })
+              icon: Icon(Icons.arrow_back),
+              onPressed: onBackPressed, // Llama a la función de devolución de llamada
+            )
           ],
         ),
       ),
