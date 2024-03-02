@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:senaflutterapp/models/infraestructuras_models.dart';
-import 'package:senaflutterapp/utils/constants.dart';
+import 'package:empabee/models/infraestructuras_models.dart';
+import 'package:empabee/utils/constants.dart';
 
 class infraestructurasServices extends GetxController {
   Future<List<InfraestructurasModels>?> getInfraestructura() async {

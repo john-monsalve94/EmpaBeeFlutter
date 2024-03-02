@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:senaflutterapp/constants/constants.dart';
-import 'package:senaflutterapp/views/twoViews.dart';
-import 'package:senaflutterapp/views/entradaSena.dart';
-import 'package:senaflutterapp/views/signin.dart';
-import 'package:senaflutterapp/views/signup.dart';
-import 'package:senaflutterapp/views/splashscreen.dart';
+import 'package:empabee/constants/constants.dart';
+import 'package:empabee/views/twoViews.dart';
+import 'package:empabee/views/entradaSena.dart';
+import 'package:empabee/views/signin.dart';
+import 'package:empabee/views/signup.dart';
+import 'package:empabee/views/splashscreen.dart';
 
 void main() => runApp(MyApp());
 

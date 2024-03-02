@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:senaflutterapp/ui/widgets/responsive_ui.dart';
-import 'package:senaflutterapp/ui/widgets/customappbar.dart';
+import 'package:empabee/ui/widgets/responsive_ui.dart';
+import 'package:empabee/ui/widgets/customappbar.dart';
 
 class TwoViews extends StatefulWidget {
   const TwoViews({Key? key}) : super(key: key);

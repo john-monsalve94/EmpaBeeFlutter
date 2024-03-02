@@ -1,4 +1,4 @@
-import 'package:senaflutterapp/views/entradaSena.dart';
+import 'package:empabee/views/entradaSena.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -11,7 +11,7 @@ class LoginAuthServices {
     BuildContext context,
   ) async {
     final response =
-        await http.post(Uri.parse('http://192.168.101.6:8000/api/login'),
+        await http.post(Uri.parse('http://192.168.137.1:8000/api/login'),
         body: {
       'email': email,
       'contrasena': contrasena,

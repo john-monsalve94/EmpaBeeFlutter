@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:senaflutterapp/constants/constants.dart';
-import 'package:senaflutterapp/ui/widgets/custom_shape.dart';
-import 'package:senaflutterapp/ui/widgets/responsive_ui.dart';
-import 'package:senaflutterapp/ui/widgets/textformfield.dart';
-import 'package:senaflutterapp/views/entradaSena.dart';
-import 'package:senaflutterapp/services/login_auth_services.dart';
+import 'package:empabee/constants/constants.dart';
+import 'package:empabee/ui/widgets/custom_shape.dart';
+import 'package:empabee/ui/widgets/responsive_ui.dart';
+import 'package:empabee/ui/widgets/textformfield.dart';
+import 'package:empabee/views/entradaSena.dart';
+import 'package:empabee/services/login_auth_services.dart';
 
 class SignInPage extends StatelessWidget {
   @override

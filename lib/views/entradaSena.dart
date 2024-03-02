@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:senaflutterapp/models/infraestructuras_models.dart';
-import 'package:senaflutterapp/services/infraestructuras_services.dart';
-import 'package:senaflutterapp/ui/widgets/custom_shape.dart';
-import 'package:senaflutterapp/ui/widgets/customappbar.dart';
-import 'package:senaflutterapp/ui/widgets/responsive_ui.dart';
-import 'package:senaflutterapp/views/twoViews.dart';
+import 'package:empabee/models/infraestructuras_models.dart';
+import 'package:empabee/services/infraestructuras_services.dart';
+import 'package:empabee/ui/widgets/custom_shape.dart';
+import 'package:empabee/ui/widgets/customappbar.dart';
+import 'package:empabee/ui/widgets/responsive_ui.dart';
+import 'package:empabee/views/twoViews.dart';
 import 'package:http/http.dart' as http;
 
 class EntradaSena extends StatefulWidget {

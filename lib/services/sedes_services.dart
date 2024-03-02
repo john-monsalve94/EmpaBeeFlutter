@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
-import 'package:senaflutterapp/utils/constants.dart';
-import 'package:senaflutterapp/models/sede_models.dart';
+import 'package:empabee/utils/constants.dart';
+import 'package:empabee/models/sede_models.dart';
 
 class SedesService {
   Future<List<Sedes>?> getSedes() async {
